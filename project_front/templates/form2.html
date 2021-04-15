@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../resources/css/form.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <style>
+        .speech {
+            border: 1px solid #DDD;
+            width: 300px;
+            padding: 0;
+            margin: 0
+        }
+
+        .speech input {
+            border: 0;
+            width: 240px;
+            display: inline-block;
+            height: 30px;
+        }
+
+        .speech img {
+            float: right;
+            width: 40px
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="#">Home</a>
+                <a class="nav-item nav-link" href="#">About us</a>
+                <a class="nav-item nav-link active" href="#">Form</a>
+                <a class="nav-item nav-link" href="../templates/login.html">Login</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <header class="header">
+            <h1 id="title" class="text-center">Ward nuber <span>xxxx</span> </h1>
+            <p id="description" class="description text-center">
+                Thank you for taking the time to help us improve!
+            </p>
+        </header>
+        <form id="survey-form">
+            <div class="form-group">
+                <label id="name-label" for="name">Name</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" required />
+            </div>
+            <div class="form-group">
+                <label id="email-label" for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Enter your Email"
+                    required />
+            </div>
+            <div class="form-group">
+                <label id="number-label" for="number">Contact Number</label>
+                <input type="text" name="contact_number" id="number" class="form-control" placeholder="Mobile number"
+                    required />
+            </div>
+            <div class="form-group">
+                <p>What is the major problem you are facing?</p>
+                <select id="dropdown" name="role" class="form-control" required>
+                    <option disabled selected value>Select from following</option>
+                    <option value="garbage">Garbage</option>
+                    <option value="electricity">Electricity</option>
+                    <option value="water">Water Supply</option>
+                    <option value="animals">Stray Animals</option>
+                    <option value="crime">Crime</option>
+                    <option value="sewage">Sewage</option>
+                    <option value="tree">Park and Playgrounds</option>
+                    <option value="fire">Fire</option>
+                    <option value="land">Land</option>
+                    <option value="roads">Roads</option>
+                    <option value="transport">Public Transport</option>
+                    <option value="traffic">Traffic</option>
+                    <option value="lakes">Lakes</option>
+                    <option value="others">Other</option>
+                </select>
+            </div>
+            <div>
+                <img src="../resources/images/objective.png" onclick="showObjective()"
+                    style="width:10%;; margin-left: 25%;">
+                <img src="../resources/images/subjective.png" onclick="showSubjective()"
+                    style="width:10%;margin-left: 10%;">
+            </div>
+            <div class="form-group" id="objective" style="display: none;">
+                <p>How much satisfied you are with government's work in this field ?</p>
+                <label>
+                    <input name="user-recommend" value="good" type="radio" class="input-radio" checked />Good</label>
+                <label>
+                    <input name="user-recommend" value="normal" type="radio" class="input-radio" />Normal</label>
+
+                <label><input name="user-recommend" value="bad" type="radio" class="input-radio" />Bad</label>
+            </div>
+            <div class="form-group" id="subjective" style="display: none;">
+                <p>Description of probl em</p>
+                <textarea id="transcript" class="input-textarea" name="discription"
+                    placeholder="Enter your description here..."></textarea>
+                <img style="width:10%" onclick="startDictation()" src="../resources/images/verbal.png">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" id="submit" class="submit-button" onclick="submitFunction()">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    let obj = document.getElementById("objective");;
+    let sub = document.getElementById("subjective");
+    function showObjective() {
+        obj.style.display = "block";
+        sub.style.display = "none";
+    }
+    function showSubjective() {
+        sub.style.display = "block";
+        obj.style.display = "none";
+    }
+    function clearValue(variable) {
+        variable.value = "";
+    }
+    function submitFunction() {
+        if (sub.style.display === "none") {
+            clearValue(sub);
+        }
+        else {
+            clearValue(obj);
+        }
+    }
+
+    // voice recognition
+    function startDictation() {
+
+        if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+            var recognition = new webkitSpeechRecognition();
+
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            recognition.lang = "en-US";
+            recognition.start();
+
+            recognition.onresult = function (e) {
+                document.getElementById('transcript').value
+                    = e.results[0][0].transcript;
+                recognition.stop();
+                document.getElementById('labnol').submit();
+            };
+
+            recognition.onerror = function (e) {
+                recognition.stop();
+            }
+
+        }
+    }
+
+</script>
+
+</html>
