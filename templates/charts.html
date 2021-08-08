@@ -2,42 +2,183 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/form.css') }}">
     <script type="text/javascript">
+
+        var d1 = "{{result[0][1]}}";
+        var d2 = "{{result[1][1]}}";
+        var d3 = "{{result[2][1]}}";
+        var d4 = "{{result[3][1]}}";
+        var d5 = "{{result[4][1]}}";
+        var d6 = "{{result[5][1]}}";
+        var d7 = "{{result[6][1]}}";
+
+        var label1 = "{{result[0][0]}}";
+        var label2 = "{{result[1][0]}}";
+        var label3 = "{{result[2][0]}}";
+        var label4 = "{{result[3][0]}}";
+        var label5 = "{{result[4][0]}}";
+        var label6 = "{{result[5][0]}}";
+        var label7 = "{{result[6][0]}}";
+
         window.onload = function () {
-            var chart = new CanvasJS.Chart("chartContainer",
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+
+                theme: "light2", // "light1", "light2", "dark1", "dark2"
+                title: {
+                    text: "Top Voted"
+                },
+                axisY: {
+                    title: "Number of people"
+                },
+                data: [{
+                    type: "column",
+                    showInLegend: true,
+                    legendMarkerColor: "grey",
+                    dataPoints: [
+                        { y: parseInt(d1), indexLabel: label1 },
+                        { y: parseInt(d2), indexLabel: label2 },
+                        { y: parseInt(d3), indexLabel: label3 },
+                        { y: parseInt(d4), indexLabel: label4 },
+                        { y: parseInt(d5), indexLabel: label5 },
+                        { y: parseInt(d6), indexLabel: label6 },
+                        {
+                            y: parseInt(d7), indexLabel: label7
+                        },
+                    ]
+                }]
+            });
+            chart.render();
+
+        }
+
+        buildGraph = function (data) {
+            var li = data.list
+            var chart = new CanvasJS.Chart("chartContainer2",
                 {
                     title: {
-                        text: "Gaming Consoles Sold in 2012"
+                        text: li[0] + " graph for {{month}}"
                     },
-                    legend: {
-                        maxWidth: 350,
-                        itemWidth: 120
-                    },
+                    // legend: {
+                    //     maxWidth: 640,
+                    //     itemWidth: 210
+                    // },
+
                     data: [
                         {
                             type: "pie",
                             showInLegend: true,
                             legendText: "{indexLabel}",
                             dataPoints: [
-                                { y: .41, indexLabel: "PlayStation 3" },
-                                { y: .21, indexLabel: "Wii" },
-                                { y: .3, indexLabel: "Xbox 360" },
-                                { y: .11, indexLabel: "Nintendo DS" },
-                                { y: .17, indexLabel: "PSP" },
-                                { y: .3, indexLabel: "Nintendo 3DS" },
-                                { y: .47, indexLabel: "PS Vita" }
+                                { y: li[1], indexLabel: "Positive" },
+                                { y: li[2], indexLabel: "Weakly positive" },
+                                { y: li[2], indexLabel: "Strongly positive" },
+                                { y: li[3], indexLabel: "Negative" },
+                                { y: li[4], indexLabel: "Weakly Negative" },
+                                { y: li[5], indexLabel: "Strongly Negative" },
+                                { y: li[6], indexLabel: "Neutral" }
                             ]
+
                         }
                     ]
                 });
             chart.render();
-        }
+        };
+        $(document).ready(function () {
+            $('form').on('submit', function (event) {
+                $.ajax({
+                    data: {
+                        CompCat: $('#dropdown').val()
+                    },
+                    type: 'POST',
+                    url: '/graph/{{month}}/{{wardNumber}}',
+
+                })
+                    .done(function (data) {
+                        buildGraph(data);
+                    });
+                event.preventDefault();
+            });
+        });
+
+
     </script>
     <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 
 <body>
-    <div id="chartContainer" style="height: 300px; width: 100%;background-color: #e9e9e9;"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Feed Me</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/profile">My Profile</a>
+                <a class="nav-item nav-link" href="/">About us</a>
+                <a class="nav-item nav-link active" href="/wc/{{wardNumber}}">Ward</a>
+                <a class="nav-item nav-link" href="/logout">Log out</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <h2 style="display: block;text-align: center;color: red;">The Major issue of this ward is {{major_prob}}</h2>
+    <div class="banner-wrapper" style="height:auto">
+        <img alt="Word Cloud" src="{{ url_for('static', filename = 'upload.png') }}"
+            style="width: 40%;display: block;margin-left: auto;margin-right: auto;">
+    </div>
+    <h2 style="color: black;">Which Graph You want to see</h2>
+    <form action="">
+        <div class=" form-group">
+
+            <select id="dropdown" name="CompCat" class="form-control" required>
+                <option disabled selected value>Select from following</option>
+                <option value="Garbage">Garbage</option>
+                <option value="Electricity">Electricity</option>
+                <option value="Water Supply">Water Supply</option>
+                <option value="Stray Animals">Stray Animals</option>
+                <option value="Crime">Crime</option>
+                <option value="Sewage">Sewage</option>
+                <option value="Park">park and Playgrounds</option>
+                <option value="Fire">fire</option>
+                <option value="Land">land</option>
+                <option value="Roads">Roads</option>
+                <option value="Public Transport">Public Transport</option>
+                <option value="Traffic">Traffic</option>
+                <option value="lakes">Lakes</option>
+                <option value="others">Other</option>
+            </select>
+            <div class="form-group">
+                <button type="submit" id="submit" class="submit-button">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </form>
+    <div id="chartContainer2" style="height: 700px; width: 100%;background-color: #e9e9e9;margin-left: 10px;"></div>
 </body>
+
 
 </html>

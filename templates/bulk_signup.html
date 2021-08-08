@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <link rel="stylesheet" type="text/css" href="../resources/css/bulksignup.css">
+  <link rel="stylesheet" type="text/css" href="../static/css/form.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
@@ -12,23 +12,29 @@
 </head>
 
 <body>
-  <!-- Upload  -->
-  <div class="container">
-    <div class="form-group">
-      <input type="file" name="img[]" class="file">
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1"><i class="fas fa-paperclip"></i></span>
-        </div>
-        <input type="text" class="form-control" disabled placeholder="Upload File" aria-label="Upload File"
-          aria-describedby="basic-addon1">
-        <div class="input-group-append">
-          <button class="browse input-group-text btn btn-primary" id="basic-addon2"><i class="fas fa-search"></i>
-            Browse</button>
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">FeedMe</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="/profile">My Profile</a>
+        <a class="nav-item nav-link" href="/">About us</a>
+        <a class="nav-item nav-link active" href="/bulksignup">Add Citizens</a>
+        <a class="nav-item nav-link" href="/logout">Log out</a>
       </div>
     </div>
-  </div>
+  </nav>
+
+  <h2>Uplaod File Here!</h2>
+  <form method="POST" action="/bulksignup" enctype="multipart/form-data">
+    <label class="upload">
+      <input name="upload" class="form-control" type="file">
+    </label>
+    <button type="submit" id="submit" class="submit-button" onclick="submitFunction()">Submit</button>
+  </form>
 </body>
 
 </html>

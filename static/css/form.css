@@ -188,5 +188,9 @@ form {
 .submit-button:hover {
   background: rgba(173,255,47,0.7);
 }
-
+.CoverPhoto{
+  height: 600px;
+  width: 1000px;
+  margin-left: 159px;
+}
 

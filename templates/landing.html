@@ -1,0 +1,143 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../static/css/landing.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</head>
+
+
+<body>
+    <div class="container-fluid text-center">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">FeedMe</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="/profile">My Profile</a>
+                    <a class="nav-item nav-link active" href="/">About us</a>
+                    {% if (flag==False) %}
+                    <a class="nav-item nav-link" href="/login">Login</a>
+                    {% else %}
+                    <a class="nav-item nav-link" href="/logout">Log out</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+
+
+        <!-- where all magin begins -->
+
+        <div class="row"><img class="img-responsive oprah-img" src="../static/images/feedback.jpg">
+
+        </div>
+
+        <div class="row in4 after-oprah" style="padding-left: 15%;">
+            <span class="row">
+                <h1>A minimalistic Feedback site</h1>
+            </span>
+
+
+            <img class="" style="width:80%" src="../static/images/feedback_report.jpg">
+            <br></br>
+            <span class="" style="width:80%">
+                The aim of our application is to solve the societal problems being faced by citizens, which facilitates
+                them to lead a
+                decent and hassle-free life. Our application takes feedback from citizens in objective, subjective or
+                verbal manner. The
+                application aims to analyse the sentiments of citizens in order to identify the major problem being
+                faced. It makes use
+                of various data visualization tools like wordclouds, pie charts and bar graphs, to represent the
+                results. The wordcloud
+                depicts the major problem being faced by citizens and these results are sent to the ward commissioner
+                and finally to the
+                city mayor, to address and solve the problem immediately
+            </span>
+            <hr>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-6">
+                <span>
+                    <h3>What are Word Clouds?</h3>
+                </span>
+
+
+                <img class="" style="width:80%" src="../static/images/wordcloud.jpg">
+                <br></br>
+                <span class="" style="width:80%">
+                   Word clouds (also known as text clouds or tag clouds) work in a simple way: the more a specific word appears in a source of textual data (such as a speech, blog post, or database), the bigger and bolder it appears in the word cloud.
+                </span>
+                <hr>
+                <button class="btn btnWhite btn-large">Read more</button><br>
+
+            </div>
+
+            <div class="col-md-6">
+                <span>
+                    <h3>What Is a Bar Graph?</h3>
+                </span>
+
+
+                <img class="" style="width:80%" src="../static/images/barGraph.jpg">
+                <br></br>
+                <span class="" style="width:80%">
+                    A bar graph represents data using a series of bars across two axes. The x-axis (the horizontal) classifies the data by group, with one bar for each group. So for example, if you were displaying the number of beads of each color in a jar, the x-axis would have a section for each color, and each color would have its own bar. The y-axis (the vertical) shows the value for the category for each bar.
+                </span>
+                <hr>
+                <button class="btn btnWhite btn-large">Read more</button><br>
+
+            </div>
+
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <span>
+                    <h3>What Is a Pie Chart?</h3>
+                </span>
+
+
+                <img class="" style="width:80%" src="../static/images/pieChart.jpg">
+                <br></br>
+                <span class="" style="width:80%">
+                    Pie charts are circular graphs that display percentages of a whole as if they were slices of a pie. This is very similar to bar graphs in that the individual slices of pie mean that the data has to have the potential to be categorized.
+                </span>
+                <hr>
+                <button class="btn btnWhite btn-large">Read more</button><br>
+
+            </div>
+
+            
+
+        </div>
+        <hr>
+
+
+
+
+
+
+
+
+    </div> <!-- end class container-fluid -->
+</body>
+
+</html>

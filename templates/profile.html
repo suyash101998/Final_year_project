@@ -15,23 +15,30 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../resources/css/profile.css">
+    <link rel="stylesheet" href="../static/css/profile.css">
     <title>MY Profile</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/">FeedMe</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="../templates/profile.html">My Profile</a>
-                <a class="nav-item nav-link" href="#">About us</a>
-                <a class="nav-item nav-link" href="#">Form</a>
-                <a class="nav-item nav-link" href="../templates/login.html">Login</a>
+                <a class="nav-item nav-link active" href="/profile">My Profile</a>
+                <a class="nav-item nav-link" href="/">About us</a>
+                {%if (userType=="citizen") %}
+                <a class="nav-item nav-link" href="/form">Form</a>
+                {% elif (userType=="mayor")%}
+                <a class="nav-item nav-link" href="/mayor">All Wards</a>
+                {%else%}
+                <a class="nav-item nav-link" href="/wc/{{res[0][3]}}">My Ward</a>
+                <a class="nav-item nav-link" href="/bulksignup">Add Citizens</a>
+                {%endif%}
+                <a class="nav-item nav-link" href="/logout">Log out</a>
             </div>
         </div>
     </nav>
@@ -45,13 +52,15 @@
                                 <div class="user-avatar">
                                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
                                 </div>
-                                <h5 class="user-name">Suyash Shukla</h5>
-                                <h6 class="user-email">shukla@123.com</h6>
+                                <h5 class="user-name">{{res[0][1]}}</h5>
+                                <h6 class="user-email">{{res[0][5]}}</h6>
                             </div>
+                            {%if (userType!="mayor") %}
                             <div class="about">
-                                <h5>About</h5>
-                                <p>Just in case we come up with something.</p>
+                                <h5>Ward Name</h5>
+                                <p>{{res[0][4]}}</p>
                             </div>
+                            {%endif%}
                         </div>
                     </div>
                 </div>
@@ -66,54 +75,56 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="fullName">Full Name</label>
-                                    <p>Suyash</p>
+                                    <p>{{res[0][1]}}</p>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="eMail">Email</label>
-                                    <p>suyash@123.com</p>
+                                    <p>{{res[0][5]}}</p>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="phone">Phone</label>
-                                    <p>99999999</p>
+                                    <p>{{res[0][2]}}</p>
                                 </div>
                             </div>
+                            {%if (userType!="mayor") %}
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="website">Ward Number</label>
-                                    <p>something</p>
+                                    <p>{{res[0][3]}}</p>
                                 </div>
                             </div>
+                            {%endif%}
                         </div>
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <h6 class="mt-3 mb-2 text-primary">Address</h6>
                             </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="Street">Street</label>
-                                    <p>something1</p>
+                                    <label for="Street">Full address</label>
+                                    <p>{{res[0][6]}}</p>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="ciTy">City</label>
-                                    <p>something2</p>
+                                    <p>Banglore</p>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="sTate">State</label>
-                                    <p>something3</p>
+                                    <p>Karnataka</p>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="zIp">Zip Code</label>
-                                    <p>something4</p>
+                                    <p>562110</p>
                                 </div>
                             </div>
                         </div>

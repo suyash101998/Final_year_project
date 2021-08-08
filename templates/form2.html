@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../resources/css/form.css">
+    <link rel="stylesheet" href="../static/css/form.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -50,75 +50,76 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="../templates/profile.html">My Profile</a>
-                <a class="nav-item nav-link" href="#">About us</a>
-                <a class="nav-item nav-link active" href="#">Form</a>
-                <a class="nav-item nav-link" href="../templates/login.html">Login</a>
+                <a class="nav-item nav-link" href="/profile">My Profile</a>
+                <a class="nav-item nav-link" href="/">About us</a>
+                <a class="nav-item nav-link active" href="/form">Form</a>
+                <a class="nav-item nav-link" href="/logout">Log out</a>
             </div>
         </div>
     </nav>
     <div class="container">
         <header class="header">
-            <h1 id="title" class="text-center">Ward number <span>xxxx</span> </h1>
+            <h1 id="title" class="text-center">Ward number <span>{{ward}}</span> </h1>
             <p id="description" class="description text-center">
                 Thank you for taking the time to help us improve!
             </p>
         </header>
-        <form id="survey-form">
+        <form id="survey-form" action="{{ url_for('form') }}" method="POST">
             <div class="form-group">
                 <label id="name-label" for="name">Name</label>
                 <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" required />
             </div>
+
             <div class="form-group">
-                <label id="email-label" for="email">Email</label>
-                <input type="email" name="email" id="email" class="form-control" placeholder="Enter your Email"
-                    required />
-            </div>
-            <div class="form-group">
-                <label id="number-label" for="number">Contact Number</label>
+                <label id="number-label" for="contact_number">Contact Number</label>
                 <input type="text" name="contact_number" id="number" class="form-control" placeholder="Mobile number"
                     required />
             </div>
             <div class="form-group">
+                <label id="number-label" for="date">Date</label>
+                <input type="date" name="date" id="number" class="form-control">
+            </div>
+
+            <div class=" form-group">
                 <p>What is the major problem you are facing?</p>
                 <select id="dropdown" name="role" class="form-control" required>
                     <option disabled selected value>Select from following</option>
-                    <option value="garbage">Garbage</option>
-                    <option value="electricity">Electricity</option>
-                    <option value="water">Water Supply</option>
-                    <option value="animals">Stray Animals</option>
-                    <option value="crime">Crime</option>
-                    <option value="sewage">Sewage</option>
-                    <option value="tree">Park and Playgrounds</option>
-                    <option value="fire">Fire</option>
-                    <option value="land">Land</option>
-                    <option value="roads">Roads</option>
-                    <option value="transport">Public Transport</option>
-                    <option value="traffic">Traffic</option>
+                    <option value="Garbage">Garbage</option>
+                    <option value="Electricity">Electricity</option>
+                    <option value="Water Supply">Water Supply</option>
+                    <option value="Stray Animals">Stray Animals</option>
+                    <option value="Crime">Crime</option>
+                    <option value="Sewage">Sewage</option>
+                    <option value="Park">park and Playgrounds</option>
+                    <option value="Fire">fire</option>
+                    <option value="Land">land</option>
+                    <option value="Roads">Roads</option>
+                    <option value="Public Transport">Public Transport</option>
+                    <option value="Traffic">Traffic</option>
                     <option value="lakes">Lakes</option>
                     <option value="others">Other</option>
                 </select>
             </div>
             <div>
-                <img src="../resources/images/objective.png" onclick="showObjective()"
+                <img src="../static/images/objective.png" onclick="showObjective()"
                     style="width:10%;; margin-left: 25%;">
-                <img src="../resources/images/subjective.png" onclick="showSubjective()"
+                <img src="../static/images/subjective.png" onclick="showSubjective()"
                     style="width:10%;margin-left: 10%;">
             </div>
             <div class="form-group" id="objective" style="display: none;">
                 <p>How much satisfied you are with government's work in this field ?</p>
                 <label>
-                    <input name="user-recommend" value="good" type="radio" class="input-radio" checked />Good</label>
+                    <input name="description" value="good" type="radio" class="input-radio" />Good</label>
                 <label>
-                    <input name="user-recommend" value="normal" type="radio" class="input-radio" />Normal</label>
+                    <input name="description" value="normal" type="radio" class="input-radio" />Normal</label>
 
-                <label><input name="user-recommend" value="bad" type="radio" class="input-radio" />Bad</label>
+                <label><input name="description" value="bad" type="radio" class="input-radio" />Bad</label>
             </div>
             <div class="form-group" id="subjective" style="display: none;">
                 <p>Description of probl em</p>
-                <textarea id="transcript" class="input-textarea" name="discription"
+                <textarea id="transcript" class="input-textarea" name="description"
                     placeholder="Enter your description here..."></textarea>
-                <img style="width:10%" onclick="startDictation()" src="../resources/images/verbal.png">
+                <img style="width:10%" onclick="startDictation()" src="../static/images/verbal.png">
             </div>
 
             <div class="form-group">
@@ -135,10 +136,12 @@
     function showObjective() {
         obj.style.display = "block";
         sub.style.display = "none";
+        sub.value = "";
     }
     function showSubjective() {
         sub.style.display = "block";
         obj.style.display = "none";
+        obj.value = "";
     }
     function clearValue(variable) {
         variable.value = "";
